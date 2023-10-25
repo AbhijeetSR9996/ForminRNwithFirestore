@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "311815360234",
+    "project_id": "lakshyaeducation-8fd9e",
+    "storage_bucket": "lakshyaeducation-8fd9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:311815360234:android:ad3ef7c14e42c1b097d193",
+        "android_client_info": {
+          "package_name": "com.lakshyaeducation"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0vZvP9xVO5JoLBP-v3eD2WPHnPZgNoV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
