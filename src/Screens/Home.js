@@ -63,7 +63,7 @@ const Home = () => {
             admissions and help students achieve their educational goals.
           </Text>
           <Text style={styles.secondescriptiontext}>
-            So, what are you waiting for? Take first step toward your 🎯 and
+            So, what are you waiting for? Take first step towards your 🎯 and
             enquire now..!!
           </Text>
           <View style={styles.buttonview}>
