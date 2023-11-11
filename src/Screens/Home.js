@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -6,11 +6,38 @@ import {
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
+  BackHandler,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import Modal from 'react-native-modal';
 
 const Home = () => {
   const navigation = useNavigation();
+
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const handleBackPress = () => {
+    setModalVisible(true);
+    return true;
+  };
+
+  const handleModalCancel = () => {
+    setModalVisible(false);
+  };
+
+  const handleModalAccept = () => {
+    setModalVisible(false);
+    BackHandler.exitApp();
+  };
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
+    };
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
@@ -48,6 +75,61 @@ const Home = () => {
             </TouchableOpacity>
           </View>
         </View>
+        {/* Exit Modal */}
+        <Modal isVisible={isModalVisible}>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: '#fff',
+              borderRadius: 10,
+              marginVertical: 300,
+              marginHorizontal: 20,
+            }}>
+            <View
+              style={{
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+                alignSelf: 'center',
+              }}>
+              <Text style={styles.firstdescriptiontext}>
+                WANT TO EXIT THE APP ??{' '}
+              </Text>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'row',
+              }}>
+              <View style={styles.loginbuttonContainer}>
+                <TouchableOpacity
+                  style={{
+                    ...styles.buttoncontainer,
+                    ...styles.buttoncontainerextra,
+                  }}
+                  activeOpacity={0.7}
+                  onPress={handleModalCancel}>
+                  <Text style={styles.buttontext}>NO</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.loginbuttonContainer}>
+                <TouchableOpacity
+                  style={{
+                    ...styles.buttoncontainer,
+                    ...styles.buttoncontainerextra,
+                  }}
+                  activeOpacity={0.7}
+                  onPress={handleModalAccept}>
+                  <Text style={styles.buttontext}>YES </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </Modal>
       </ImageBackground>
     </SafeAreaView>
   );
@@ -73,14 +155,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    //backgroundColor: 'blue',
   },
   descriptionview: {
     flex: 0.9,
     justifyContent: 'flex-start',
     alignItems: 'stretch',
     marginHorizontal: 40,
-    //backgroundColor: 'red',
   },
   buttonview: {
     marginTop: 20,
@@ -90,6 +170,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 10,
     alignItems: 'center',
+  },
+  buttoncontainerextra: {
+    width: 100,
   },
   headingtext: {
     color: '#000',
@@ -112,6 +195,12 @@ const styles = StyleSheet.create({
   },
   buttontext: {
     color: '#fff',
+  },
+  loginbuttonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: -15,
+    marginHorizontal: 5,
   },
 });
 
